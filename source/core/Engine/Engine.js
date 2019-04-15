@@ -59,6 +59,9 @@ class Engine{
     //Update player controls first
     this.PlayerClass.Update();
 
+    //Update models
+    this.Scene.Update();
+
   }
 
   AddObject(Obj){

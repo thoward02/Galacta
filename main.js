@@ -17,10 +17,9 @@ const CreateWindow = () => {
     fullscreen: true
   });
 
-  MainWindow.loadURL('http://127.0.0.1:2000');
+  MainWindow.loadURL('http://127.0.0.1:2000/Galacta');
 
   MainWindow.on('closed', () => {
-    child.kill();
     mainWindow = null;
   });
 

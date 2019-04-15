@@ -5,7 +5,7 @@
 *		This will esentially be the way we build the 3D enviroment around the user
 *		-== Variables ==-
 *			@vairable SObj {THREE.Scene} - Contains the 3D space that the scene takes place in
-*
+*			@variable UpdateList {Object} - Objects that need to update
 *		-== Functions ==-
 *			@Function LoadTestScene {null} - Loads a debug scene, with a greene box.
 *
@@ -18,35 +18,63 @@ class MainScene{
 	constructor(){
 
 		this.SObj = new THREE.Scene;
-
+		this.UpdateList = [];
+		this.BoundingList = [];
 	}
 
 	LoadTestScene(){
 		//Lighting
-
+		//new Lighting(Name, type, power, colour, position xyz, direction, intensity)
 		//Basic Sun
-		var Sun = new Lighting("Sun", 0, 0.3, 0xe6ae0f, -1, 5, 0, null, null)
+		var Sun = new Lighting("Sun", 0, 1000, 0XFFFFFF, -1, 10, 0, -1, 1)
 		this.SObj.add(Sun.object);
 
 		//Lamp light
-		var Lamp = new Lighting("SkyLamp", 1, 0.25, 0xABFFEF, 0, 1, 0, -1, 2);
+		var Lamp = new Lighting("SkyLamp", 1, 0.25, 0xABFFEF, 0, 10, 0, -1, 2);
 		this.SObj.add(Lamp.object);
 
 		//Add test object
-		//Create Box
-		var geometry = new THREE.BoxGeometry(1, 1, 1);
+		//Create Drone
+		var DroneObj = new Drone();
+		var DroneMesh = DroneObj.ReturnObj();
+		this.SObj.add(DroneMesh);
 
-		//Colour it
-		var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+		this.UpdateList[this.UpdateList.length] = DroneObj;
 
-		//Create Mesh and position it
-		var cube = new THREE.Mesh( geometry, material );
-		cube.position.x = 0;
-		cube.position.y = 10;
-		cube.position.z = 2;
+		//lOAD FLOOR
+		var FloorX = 100;
+		var FloorY = 1;
+		var FloorZ = 100;
 
+		var FloorMesh = new THREE.BoxGeometry(100, 1, 100);
+		var FloorMaterial = new THREE.MeshDepthMaterial( {parameter : {color:0xFFF, lights: true} } );
 
-		this.SObj.add(cube);
+		var Floor = new THREE.Mesh(FloorMesh, FloorMaterial);
+		Floor.position.x = 0;
+		Floor.position.y = 8;
+		Floor.position.z = 0;
+
+		var FloorXArea = [((FloorX / 2) + Floor.position.x), ((FloorX / 2) -Floor.position.x)];
+		var FloorYArea = [((FloorY / 2) + Floor.position.y), ((FloorY / 2) - Floor.position.y)];
+		var FloorZArea = [((FloorZ / 2) + Floor.position.z), ((FloorX / 2) -Floor.position.z)];
+
+		//Set the distance limit objcts can come within
+		var Boundary = 1;
+		FloorXArea[0] += Boundary; FloorXArea[1] -= Boundary;
+		FloorYArea[0] += Boundary; FloorYArea[1] -= Boundary;
+		FloorZArea[0] += Boundary; FloorZArea[1] -=  Boundary;
+
+		Floor.position.AREA = [FloorXArea, FloorYArea, FloorZArea];
+
+		this.BoundingList[this.BoundingList.length] = Floor;
+		this.SObj.add(Floor);
+
+	}
+
+	Update(){
+		for(var Obj in this.UpdateList){
+				this.UpdateList[Obj].Update();
+		}
 
 
 	}

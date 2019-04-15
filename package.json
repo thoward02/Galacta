@@ -10,7 +10,7 @@
   "author": "SpecifiesDev / THoward02",
   "license": "MIT",
   "dependencies": {
-    "electron": "^3.1.6",
+    "electron": "^3.1.7",
     "express": "^4.16.4"
   },
   "scripts": {
