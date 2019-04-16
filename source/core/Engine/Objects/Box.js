@@ -2,7 +2,7 @@ class Box{
 
   constructor(){
     this.Mesh = new THREE.BoxGeometry(2, 1, 2);
-    this.Material =  new THREE.MeshDepthMaterial( {parameter : {color: 0xffa500 , lights: true} } );
+    this.Material =  new THREE.MeshPhongMaterial( {parameter : {color: 0xffa500} } );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
     this.Object.position.x = 0;
     this.Object.position.y = 21;

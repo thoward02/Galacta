@@ -31,7 +31,7 @@ class Engine{
     this.Delta = performance.now();
     this.PreviousDelta = this.Delta;
 
-    this.Debug = false;
+    this.Debug = false; //Enables PC support
   }
 
   init(){

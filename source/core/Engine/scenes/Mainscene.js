@@ -26,11 +26,11 @@ class MainScene{
 		//Lighting
 		//new Lighting(Name, type, power, colour, position xyz, direction, intensity)
 		//Basic Sun
-		var Sun = new Lighting("Sun", 0, 1000, 0XFFFFFF, -1, 10, 0, -1, 1)
+		var Sun = new Lighting("Sun", 0, .5, 0XFFFFFF, 0, 10, 0, -1, 1)
 		this.SObj.add(Sun.object);
 
 		//Lamp light
-		var Lamp = new Lighting("SkyLamp", 1, 0.25, 0xABFFEF, 0, 10, 0, -1, 2);
+		var Lamp = new Lighting("SkyLamp", 1, 0.25, 0xABFFEF, 0, 10, 0, -1.1, 1);
 		this.SObj.add(Lamp.object);
 
 		//Add test object
@@ -47,7 +47,7 @@ class MainScene{
 		var FloorZ = 100;
 
 		var FloorMesh = new THREE.BoxGeometry(100, 1, 100);
-		var FloorMaterial = new THREE.MeshDepthMaterial( {parameter : {color:0xFFF, lights: true} } );
+		var FloorMaterial = new THREE.MeshPhongMaterial( {parameter : {color:0xFFF, lights: true} } );
 
 		var Floor = new THREE.Mesh(FloorMesh, FloorMaterial);
 		Floor.position.x = 0;
