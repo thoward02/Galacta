@@ -30,6 +30,8 @@ class Engine{
 
     this.Delta = performance.now();
     this.PreviousDelta = this.Delta;
+
+    this.Debug = false;
   }
 
   init(){

@@ -31,7 +31,6 @@ class PlayerControl{
     this.PointerLockControl = new THREE.PointerLockControls(Galacta.Engine.Camera);
     this.Player.Obj = this.PointerLockControl.getObject();
 
-    if(Galacta.Engine.Camera == this.Player.Obj) console.log("F");
     //Add the Camera to the scene
     Galacta.Engine.AddObject(this.Player.Obj);
 
@@ -47,15 +46,20 @@ class PlayerControl{
     this.SetUpListeners();
 
     //Lock the window, and set unlock window
-    //this.PointerLockControl.lock();
+    if(Galacta.Engine.Debug == true){
+      this.PointerLockControl.lock();
+      window.onblur = function(){
+        Galacta.Engine.PlayerClass.PointerLockControl.unlock();
+      }
 
-    window.onblur = function(){
-    //  Galacta.Engine.PlayerClass.PointerLockControl.unlock();
+      window.onfocus = function(){
+        Galacta.Engine.PlayerClass.PointerLockControl.lock();
+      }
+
     }
 
-    window.onfocus = function(){
-    //  Galacta.Engine.PlayerClass.PointerLockControl.lock();
-    }
+
+
   }
 
   Update(){
