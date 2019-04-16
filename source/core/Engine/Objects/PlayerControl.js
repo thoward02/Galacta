@@ -31,6 +31,7 @@ class PlayerControl{
     this.PointerLockControl = new THREE.PointerLockControls(Galacta.Engine.Camera);
     this.Player.Obj = this.PointerLockControl.getObject();
 
+    if(Galacta.Engine.Camera == this.Player.Obj) console.log("F");
     //Add the Camera to the scene
     Galacta.Engine.AddObject(this.Player.Obj);
 

@@ -18,6 +18,8 @@ class Renderer{
 
 	constructor(){
 		this.RObj = new THREE.WebGLRenderer();
+		this.RObj.vr.enabled = true;
+		document.body.appendChild( WEBVR.createButton(this.RObj) );
 	}
 
 	setup() {
@@ -26,6 +28,7 @@ class Renderer{
 		this.RObj.setSize(window.innerWidth - 10, window.innerHeight - 20);
 		document.body.appendChild(this.RObj.domElement);
 
+		this.RObj.setAnimationLoop(Galacta.Engine.Renderer.animate);
 
 		// If the window gets resized, we will update the size of the renderer and update the cameras aspect ratio
 		window.addEventListener('resize', onWindowResize, false);
@@ -39,7 +42,7 @@ class Renderer{
 
 	animate() {
 			//Next frame
-			window.requestAnimationFrame(Galacta.Engine.Renderer.animate); //Recursion basically
+			//this.RObj.requestAnimationFrame(Galacta.Engine.Renderer.animate); //Recursion basically
 
 			if(GameState.PLAY) {
 				// if they're playing we can perform our animation tasks
