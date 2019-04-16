@@ -47,14 +47,14 @@ class PlayerControl{
     this.SetUpListeners();
 
     //Lock the window, and set unlock window
-    this.PointerLockControl.lock();
+    //this.PointerLockControl.lock();
 
     window.onblur = function(){
-      Galacta.Engine.PlayerClass.PointerLockControl.unlock();
+    //  Galacta.Engine.PlayerClass.PointerLockControl.unlock();
     }
 
     window.onfocus = function(){
-      Galacta.Engine.PlayerClass.PointerLockControl.lock();
+    //  Galacta.Engine.PlayerClass.PointerLockControl.lock();
     }
   }
 
