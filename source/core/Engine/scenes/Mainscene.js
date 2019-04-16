@@ -34,12 +34,12 @@ class MainScene{
 		this.SObj.add(Lamp.object);
 
 		//Add test object
-		//Create Drone
-		var DroneObj = new Drone();
-		var DroneMesh = DroneObj.ReturnObj();
-		this.SObj.add(DroneMesh);
+		//Create Box
+		var BoxObj = new Box();
+		var BoxMesh = BoxObj.ReturnObj();
+		this.SObj.add(BoxMesh);
 
-		this.UpdateList[this.UpdateList.length] = DroneObj;
+		this.UpdateList[this.UpdateList.length] = BoxObj;
 
 		//lOAD FLOOR
 		var FloorX = 100;
