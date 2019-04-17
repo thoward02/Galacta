@@ -15,8 +15,8 @@ class WaterScript{
 		this.WaterPlane = new THREE.Water(
 			waterGeometry,
 				{
-					textureWidth: 512,
-					textureHeight: 512,
+					textureWidth: 1024,
+					textureHeight: 1024,
 					waterNormals: new THREE.TextureLoader().load( 'https://threejs.org/examples/textures/waternormals.jpg', function ( texture ) {
 						texture.wrapS = texture.wrapT = THREE.RepeatWrapping;
 					} ),
@@ -24,7 +24,7 @@ class WaterScript{
 					sunDirection: this.SunLight.position.clone().normalize(),
 					sunColor: 0xffffff,
 					waterColor: 0x001e0f,
-					distortionScale: 3.7,
+					distortionScale: 8,
 					fog: Galacta.Engine.Scene.SObj.fog !== undefined
 				}
 			);
@@ -42,26 +42,31 @@ class WaterScript{
 				uniforms[ 'mieCoefficient' ].value = 0.005;
 				uniforms[ 'mieDirectionalG' ].value = 0.8;
 			this.parameters = {
-				distance: 400,
-				inclination: 0.49,
-				azimuth: 0.205
+				distance: 100,
+				inclination: 9.5,
+				azimuth: 0.75
 			};
 			this.CubeCamera = new THREE.CubeCamera( 0.1, 1, 512 );
 			this.CubeCamera.renderTarget.texture.generateMipmaps = true;
 			this.CubeCamera.renderTarget.texture.minFilter = THREE.LinearMipMapLinearFilter;
 			Galacta.Engine.Scene.SObj.background = this.CubeCamera.renderTarget;
 
+      var theta = Math.PI * ( this.parameters.inclination - 0.5 );
+			var phi = 2 * Math.PI * ( this.parameters.azimuth - 0.5 );
+
+			this.SunLight.position.x = this.parameters.distance * Math.cos( phi );
+			this.SunLight.position.y = this.parameters.distance * Math.sin( phi ) * Math.sin( theta );
+			this.SunLight.position.z = this.parameters.distance * Math.sin( phi ) * Math.cos( theta );
+
+			this.Sky.material.uniforms[ 'sunPosition' ].value = this.SunLight.position.copy( this.SunLight.position );
+			this.WaterPlane.material.uniforms[ 'sunDirection' ].value.copy( this.SunLight.position ).normalize();
+
+			this.CubeCamera.update(Galacta.Engine.Renderer.RObj, this.Sky );
+
   }
 
   Update(){
-    var theta = Math.PI * ( this.parameters.inclination - 0.5 );
-    var phi = 2 * Math.PI * ( this.parameters.azimuth - 0.5 );
-    this.SunLight.position.x = this.parameters.distance * Math.cos( phi );
-    this.SunLight.position.y = this.parameters.distance * Math.sin( phi ) * Math.sin( theta );
-    this.SunLight.position.z = this.parameters.distance * Math.sin( phi ) * Math.cos( theta );
-    this.Sky.material.uniforms[ 'sunPosition' ].value = this.SunLight.position.copy( this.SunLight.position );
-    this.WaterPlane.material.uniforms[ 'sunDirection' ].value.copy( this.SunLight.position ).normalize();
-    this.CubeCamera.update( Galacta.Engine.Renderer.RObj, this.Sky );
-
+    var time = performance.now() * 0.001;
+    this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
   }
 }

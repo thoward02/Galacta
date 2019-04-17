@@ -24,11 +24,24 @@ class MainScene{
 
 	LoadTestScene(){
 		//Lighting
+
+
+
+
+		//Set Up Water
 		var WaterSetUp = new WaterScript();
 		WaterSetUp.Setup();
+		//Add Water and Sun to update list
 		this.UpdateList[this.UpdateList.length] = WaterSetUp;
-		//Add sun to update list
 
+
+		var rectLight = new THREE.RectAreaLight( 0xffffff, 2,  10, 5 );
+		rectLight.position.set( 0, 14, 0 );
+		rectLight.lookAt( 0, 9, -10 );
+		this.SObj.add( rectLight )
+
+		var rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
+		rectLight.add( rectLightHelper );
 
 
 		//Add test object
@@ -68,7 +81,7 @@ class MainScene{
 		Floor.position.AREA = [FloorXArea, FloorYArea, FloorZArea];
 
 		this.BoundingList[this.BoundingList.length] = Floor;
-		this.SObj.add(Floor);
+
 
 	}
 

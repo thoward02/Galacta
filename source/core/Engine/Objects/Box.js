@@ -6,7 +6,7 @@ class Box{
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
 
     this.Object.position.x = 0;
-    this.Object.position.y = 21;
+    this.Object.position.y = 9.5;
     this.Object.position.z = -10;
     this.reciveShadow = true;
     this.castShadow = true;
@@ -29,12 +29,15 @@ class Box{
       var BoxY = Area[1];
       var BoxZ = Area[2];
 
+      var time = performance.now() * 0.001;
+      this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
+
+
       //If our position is inside of thsi area
       if( (BoxY[0] >= this.Object.position.y && this.Object.position.y >= BoxY[1]) ){
 
       }else{
-        this.Object.position.y = Math.sin(Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) * 0.5 + 10 ;
-        this.Object.position.y -= GravityPush;
+        //this.Object.position.y -= GravityPush;
 
       }
     }
