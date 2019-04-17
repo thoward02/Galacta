@@ -24,22 +24,13 @@ class MainScene{
 
 	LoadTestScene(){
 		//Lighting
+		var WaterSetUp = new WaterScript();
+		WaterSetUp.Setup();
+		this.UpdateList[this.UpdateList.length] = WaterSetUp;
+		//Add sun to update list
 
-		//Hard red
-		var Bulb = new THREE.PointLight( 0xff0000, 1, 100 );
-		Bulb.position.set( 1, 0, 1 );
-		this.SObj.add( Bulb );
 
-		var SecondBulb = new THREE.PointLight( 0xff0000, 1, 100 );
-		SecondBulb.position.set( 0, 20, -10 );
-		this.SObj.add( SecondBulb );
 
-		//Sunish
-		var SpotLight = new THREE.SpotLight( 0xffffff, 0.8, 0, (Math.PI / 6), 0.5, 2 );
-		SpotLight.position.set(-100, 100, 0 );
-		SpotLight.castShadow = true;
-
-		this.SObj.add(SpotLight);
 		//Add test object
 		//Create Box
 		var BoxObj = new Box();
@@ -50,10 +41,10 @@ class MainScene{
 
 		//lOAD FLOOR
 		var FloorX = 100;
-		var FloorY = 1;
+		var FloorY = 0;
 		var FloorZ = 100;
 
-		var FloorMesh = new THREE.BoxGeometry(100, 1, 100);
+		var FloorMesh = new THREE.BoxGeometry(100, 0, 100);
 		var FloorMaterial = new THREE.MeshStandardMaterial( {parameter : {color:0xFFF, lights: true} } );
 
 		var Floor = new THREE.Mesh(FloorMesh, FloorMaterial);

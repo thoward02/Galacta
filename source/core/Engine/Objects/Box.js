@@ -33,6 +33,7 @@ class Box{
       if( (BoxY[0] >= this.Object.position.y && this.Object.position.y >= BoxY[1]) ){
 
       }else{
+        this.Object.position.y = Math.sin(Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) * 0.5 + 10 ;
         this.Object.position.y -= GravityPush;
 
       }
