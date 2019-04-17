@@ -2,12 +2,15 @@ class Box{
 
   constructor(){
     this.Mesh = new THREE.BoxGeometry(2, 1, 2);
-    this.Material =  new THREE.MeshPhongMaterial( {parameter : {color: 0xffa500} } );
+    this.Material =  new THREE.MeshStandardMaterial( {parameter : {color: 0xffa500} } );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
+
     this.Object.position.x = 0;
     this.Object.position.y = 21;
     this.Object.position.z = -10;
-    this.Up = true;
+    this.reciveShadow = true;
+    this.castShadow = true;
+
   }
   ReturnObj(){
     return this.Object;

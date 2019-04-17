@@ -24,15 +24,22 @@ class MainScene{
 
 	LoadTestScene(){
 		//Lighting
-		//new Lighting(Name, type, power, colour, position xyz, direction, intensity)
-		//Basic Sun
-		var Sun = new Lighting("Sun", 0, .5, 0XFFFFFF, 0, 10, 0, -1, 1)
-		this.SObj.add(Sun.object);
 
-		//Lamp light
-		var Lamp = new Lighting("SkyLamp", 1, 0.25, 0xABFFEF, 0, 10, 0, -1.1, 1);
-		this.SObj.add(Lamp.object);
+		//Hard red
+		var Bulb = new THREE.PointLight( 0xff0000, 1, 100 );
+		Bulb.position.set( 1, 0, 1 );
+		this.SObj.add( Bulb );
 
+		var SecondBulb = new THREE.PointLight( 0xff0000, 1, 100 );
+		SecondBulb.position.set( 0, 20, -10 );
+		this.SObj.add( SecondBulb );
+
+		//Sunish
+		var SpotLight = new THREE.SpotLight( 0xffffff, 0.8, 0, (Math.PI / 6), 0.5, 2 );
+		SpotLight.position.set(-100, 100, 0 );
+		SpotLight.castShadow = true;
+
+		this.SObj.add(SpotLight);
 		//Add test object
 		//Create Box
 		var BoxObj = new Box();
@@ -47,12 +54,15 @@ class MainScene{
 		var FloorZ = 100;
 
 		var FloorMesh = new THREE.BoxGeometry(100, 1, 100);
-		var FloorMaterial = new THREE.MeshPhongMaterial( {parameter : {color:0xFFF, lights: true} } );
+		var FloorMaterial = new THREE.MeshStandardMaterial( {parameter : {color:0xFFF, lights: true} } );
 
 		var Floor = new THREE.Mesh(FloorMesh, FloorMaterial);
+
 		Floor.position.x = 0;
 		Floor.position.y = 8;
 		Floor.position.z = 0;
+
+		Floor.reciveShadow = true;
 
 		var FloorXArea = [((FloorX / 2) + Floor.position.x), ((FloorX / 2) -Floor.position.x)];
 		var FloorYArea = [((FloorY / 2) + Floor.position.y), ((FloorY / 2) - Floor.position.y)];
