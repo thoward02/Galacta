@@ -12,6 +12,7 @@ class WaterScript{
     this.DomBlock = document.createElement("Div");
     this.DomBlock.innerHTML = "NULL";
     this.DomBlock.style.zIndex = 3;
+    this.DomBlock.style.margine = 0;
     this.DomBlock.style.backgroundColor = "white";
     document.body.appendChild(this.DomBlock)
 
@@ -77,6 +78,9 @@ class WaterScript{
     var time = performance.now() * 0.001;
     this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
     this.DomBlock.innerHTML = "X: " + this.WaterPlane.rotation._x;
+    this.DomBlock.innerHTML += " CLASS: " + Galacta.Engine.Scene.SObj;
+    this.DomBlock.style.marginBotton = 0;
+
 
 
   }
