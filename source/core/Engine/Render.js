@@ -18,15 +18,28 @@ class Renderer{
 
 	constructor(){
 		//Create render
-		this.RObj = new THREE.WebGLRenderer( { antialias: true } );
+		if(Galacta.Engine.debug == false){
+			//This is resource heavy
+			this.RObj = new THREE.WebGLRenderer( { antialias: true } );
 
-		//Set Setting
-		this.RObj.setPixelRatio( window.devicePixelRatio );
-		this.RObj.setSize( window.innerWidth, window.innerHeight )
-		this.RObj.vr.enabled = true;
+			//Set Setting
+			this.RObj.setPixelRatio( window.devicePixelRatio );
+			this.RObj.setSize( window.innerWidth, window.innerHeight )
+			this.RObj.vr.enabled = true;
 
-		//Append Renderer
-		document.body.appendChild( WEBVR.createButton(this.RObj) );
+			//Append Renderer
+			document.body.appendChild( WEBVR.createButton(this.RObj) );
+		}else{
+			this.RObj = new THREE.WebGLRenderer();
+
+			//Set Setting
+			this.RObj.setPixelRatio( window.devicePixelRatio );
+			this.RObj.setSize( window.innerWidth, window.innerHeight )
+			this.RObj.vr.enabled = true;
+
+			//Append Renderer
+			document.body.appendChild( WEBVR.createButton(this.RObj) );
+		}
 	}
 
 	setup() {
