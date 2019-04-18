@@ -23,10 +23,6 @@ class MainScene{
 	}
 
 	LoadTestScene(){
-		//Lighting
-
-
-
 
 		//Set Up Water
 		var WaterSetUp = new WaterScript();
@@ -34,7 +30,7 @@ class MainScene{
 		//Add Water and Sun to update list
 		this.UpdateList[this.UpdateList.length] = WaterSetUp;
 
-
+		//Add back lighting to cube
 		var rectLight = new THREE.RectAreaLight( 0xffffff, 2,  10, 5 );
 		rectLight.position.set( 0, 14, 0 );
 		rectLight.lookAt( 0, 9, -10 );
