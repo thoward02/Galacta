@@ -8,6 +8,14 @@ class WaterScript{
   }
 
   Setup(){
+    //TEST ROTATIONS
+    this.DomBlock = document.createElement("Div");
+    this.DomBlock.innerHTML = "NULL";
+    this.DomBlock.style.zIndex = 3;
+    this.DomBlock.style.backgroundColor = "white";
+    document.body.appendChild(this.DomBlock)
+
+
     this.SunLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
 		Galacta.Engine.Scene.SObj.add( this.SunLight );
 		// Water
@@ -36,7 +44,7 @@ class WaterScript{
 			this.Sky = new THREE.Sky();
 
 			var uniforms = this.Sky.material.uniforms;
-				uniforms[ 'turbidity' ].value = 10;
+				uniforms[ 'turbidity' ].value = 100;
 				uniforms[ 'rayleigh' ].value = 2;
 				uniforms[ 'luminance' ].value = 1;
 				uniforms[ 'mieCoefficient' ].value = 0.005;
@@ -68,5 +76,8 @@ class WaterScript{
   Update(){
     var time = performance.now() * 0.001;
     this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+    this.DomBlock.innerHTML = "X: " + this.WaterPlane.rotation._x;
+
+
   }
 }
