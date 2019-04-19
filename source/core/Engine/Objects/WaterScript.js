@@ -30,7 +30,7 @@ class WaterScript{
 			);
 			this.WaterPlane.rotation.x = - Math.PI / 2;
 			this.WaterPlane.position.y = 8.6;
-			Galacta.Engine.AddObject(this.WaterPlane);
+			//Galacta.Engine.AddObject(this.WaterPlane);
 
 			// this.Skybox
 			this.Sky = new THREE.Sky();

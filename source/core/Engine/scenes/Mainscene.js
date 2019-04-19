@@ -77,7 +77,7 @@ class MainScene{
 		Floor.position.AREA = [FloorXArea, FloorYArea, FloorZArea];
 
 		this.BoundingList[this.BoundingList.length] = Floor;
-
+		this.SObj.add(Floor)
 
 	}
 
