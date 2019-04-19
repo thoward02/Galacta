@@ -24,13 +24,13 @@ class WaterScript{
 					sunDirection: this.SunLight.position.clone().normalize(),
 					sunColor: 0xffffff,
 					waterColor: 0x001e0f,
-					distortionScale: 8,
+					distortionScale: 1,
 					fog: Galacta.Engine.Scene.SObj.fog !== undefined
 				}
 			);
 			this.WaterPlane.rotation.x = - Math.PI / 2;
 			this.WaterPlane.position.y = 8.6;
-			//Galacta.Engine.AddObject(this.WaterPlane);
+			Galacta.Engine.AddObject(this.WaterPlane);
 
 			// this.Skybox
 			this.Sky = new THREE.Sky();
@@ -67,6 +67,7 @@ class WaterScript{
 
   Update(){
     var time = performance.now() * 0.001;
-    this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+    // /this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+
   }
 }
