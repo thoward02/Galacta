@@ -24,7 +24,7 @@ class TvScreen{
 
   Update(){
 
-
+    /**
     this.x += 1;
 
     if(this.x > 8) this.x = 0;
@@ -39,7 +39,7 @@ class TvScreen{
 
     this.ctx.stroke();;
 
-
+    **/
 
   }
 
