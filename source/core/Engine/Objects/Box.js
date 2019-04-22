@@ -6,10 +6,9 @@ class Box{
     this.ScreenControler = new TvScreen();
     Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler;
 
-    this.Texture = new THREE.Texture(this.ScreenControler.element);
-    this.Texture.needsUpdate  = true;
+    this.Texture = new THREE.CanvasTexture(this.ScreenControler.element);
 
-    this.Material =  new THREE.MeshBasicMaterial( {color: 0xffa500, map: this.Texture} );
+    this.Material =  new THREE.MeshBasicMaterial( {map: this.Texture} );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
 
     this.Object.position.x = 0;
@@ -25,8 +24,10 @@ class Box{
   Update(){
 
     //Grav
-    var GravityPush = 0.981 * ( (Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) / 100); // Grav in M/S times the seconds passed between frames
     //this.Object.position.y -= GravityPush; -- THE CALL TO PUSH OBJECT DOWN VIA GRAV
+    var GravityPush = 0.981 * ( (Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) / 100); // Grav in M/S times the seconds passed between frames
+
+    this.Texture.needsUpdate = true;
 
     //Check Boundings
     for(var items in Galacta.Engine.Scene.BoundingList){
@@ -38,7 +39,6 @@ class Box{
 
       var time = performance.now() * 0.001;
       this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
-
 
 
     }

@@ -26,15 +26,17 @@ class TvScreen{
 
 
     this.x += 1;
-    //console.log(this.x)
+
+    if(this.x > 8) this.x = 0;
+
     this.ctx.clearRect(0, 0, this.element.width, this.element.height);
-    this.ctx.lineWidth = 5;
+    this.ctx.lineWidth = 8;
     this.ctx.beginPath();
-    // Staring point (10,45)
+
     this.ctx.moveTo((this.x), 0);
-    // End point (180,47)
+
     this.ctx.lineTo((this.x + 5), 0);
-    // Make the line visible
+
     this.ctx.stroke();;
 
 
