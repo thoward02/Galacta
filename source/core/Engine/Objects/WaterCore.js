@@ -288,7 +288,7 @@ THREE.Water = function ( geometry, options ) {
 
 		scope.visible = false;
 
-		//renderer.vr.enabled = false; // Avoid camera modification and recursion
+		renderer.vr.enabled = false; // Avoid camera modification and recursion
 		renderer.shadowMap.autoUpdate = false; // Avoid re-computing shadows
 
 		renderer.setRenderTarget( renderTarget );

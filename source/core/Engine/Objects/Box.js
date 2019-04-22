@@ -2,7 +2,14 @@ class Box{
 
   constructor(){
     this.Mesh = new THREE.BoxGeometry(2, 1, 2);
-    this.Material =  new THREE.MeshStandardMaterial( {parameter : {color: 0xffa500} } );
+
+    this.ScreenControler = new TvScreen();
+    Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler;
+
+    this.Texture = new THREE.Texture(this.ScreenControler.element);
+    this.Texture.needsUpdate  = true;
+
+    this.Material =  new THREE.MeshBasicMaterial( {color: 0xffa500, map: this.Texture} );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
 
     this.Object.position.x = 0;
@@ -33,13 +40,7 @@ class Box{
       this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
 
 
-      //If our position is inside of thsi area
-      if( (BoxY[0] >= this.Object.position.y && this.Object.position.y >= BoxY[1]) ){
 
-      }else{
-        //this.Object.position.y -= GravityPush;
-
-      }
     }
   }
 
