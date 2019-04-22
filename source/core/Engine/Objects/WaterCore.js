@@ -297,7 +297,7 @@ THREE.Water = function ( geometry, options ) {
 
 		scope.visible = true;
 
-		//renderer.vr.enabled = currentVrEnabled;
+		renderer.vr.enabled = currentVrEnabled;
 		renderer.shadowMap.autoUpdate = currentShadowAutoUpdate;
 
 		renderer.setRenderTarget( currentRenderTarget );
