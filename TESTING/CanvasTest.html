@@ -3,56 +3,26 @@
 <body>
 
 
-  <script type="text/javascript">
-    var element = document.createElement("canvas");
-    window.ctx = element.getContext("2d")
-
-    GoUp = false;
-    GoLeft = false;
-
-    document.body.appendChild(element);
-
-    var x = 0;
-    var y = 0;
-
-    element.height = 256;
-    element.width = 256;
-
-    function Update(){
-      ctx.clearRect(0,0,element.width,element.height);
-
-      if(y > 256 && !GoUp) GoUp = true;
-      if(y < 0 && GoUp) GoUp = false;
-
-      if(x > 256 && !GoLeft) GoLeft = true;
-      if(x < 0 && GoLeft ) GoLeft = false;
-
-      if(GoUp)  y -= 1;
-      if(!GoUp) y += 1;
 
 
-      if(GoLeft)  x -= 1;
-      if(!GoLeft) x += 1;
+    <script src="TvScreen.js">
 
-      ctx.fillStyle = "#FF0000";
-      ctx.fillRect(x, y, (-5), (5) );
-    }
 
-    window.setInterval(() => {
-      Update();
-    }, 1000 / 60);
 
-  </script>
-
-    <script src="Box.js">
-      window.x = new TvScreen();
-      document.body.appendElement(x.element);
-      window.setInterval(() => {
-        window.x.UpdateCanvas.();
-      }, 1000 / 60);
     </script>
 
+    <script>  window.addEventListener("DOMContentLoaded", function(){
 
+        window.x = new TvScreen();
+        document.body.appendChild(window.x.element);
+        window.setInterval(() => {
+          window.x.UpdateCanvas();
+        }, 1000 / 60);
+
+
+
+      });
+    </script>
 
 
 
