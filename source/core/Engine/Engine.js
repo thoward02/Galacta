@@ -33,7 +33,7 @@ class Engine{
     this.PreviousDelta = this.Delta;
 
     this.Vr = false; //Enables VR Functions
-    this.Debug = true; //Enables PC support
+    this.Debug = false; //Enables PC support
 
     if(this.Debug){
       this.Vr = true;
