@@ -12,35 +12,39 @@ class TvScreen{
     this.x = 0;
     this.y = 0;
 
-    this.ctx.fillStyle = '#033333';
-    this.ctx.fillRect(0, 0, this.element.width, this.element.height);
-    this.ctx.strokeStyle = '#ff00ff';
-    this.ctx.strokeRect(0, 0, this.element.width, this.element.height);
-
+    this.GoUp = false;
+    this.GoLeft = false
 
   }
 
 
-
+  //Called by Galacta.Engine.Scene.UpdateList
   Update(){
-
-    /**
-    this.x += 1;
-
-    if(this.x > 8) this.x = 0;
-
-    this.ctx.clearRect(0, 0, this.element.width, this.element.height);
-    this.ctx.lineWidth = 8;
-    this.ctx.beginPath();
-
-    this.ctx.moveTo((this.x), 0);
-
-    this.ctx.lineTo((this.x + 5), 0);
-
-    this.ctx.stroke();;
-
-    **/
-
+    if(Galacta.Engine.Vr == true){
+      this.UpdateCanvas();
+    }
   }
 
+
+  UpdateCanvas(){
+
+    this.ctx.clearRect(0,0, this.element.width, this.element.height);
+
+    if(this.y > 8 && !this.GoUp) this.GoUp = true;
+    if(this.y < 0 && this.GoUp) this.GoUp = false;
+
+    if(this.x > 8 && !this.GoLeft) this.GoLeft = true;
+    if(this.x < 0 && this.GoLeft ) this.GoLeft = false;
+
+    if(this.GoUp)  this.y -= 0.5;
+    if(!this.GoUp) this.y += 0.5;
+
+
+    if(this.GoLeft)  this.x -= 0.5;
+    if(!this.GoLeft) this.x += 0.5;
+
+    this.ctx.fillStyle = "#FF0000";
+    this.ctx.fillRect(this.x, this.y, (-1), (1) );
+
+  }
 }

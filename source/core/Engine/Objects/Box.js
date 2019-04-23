@@ -1,7 +1,7 @@
 class Box{
 
   constructor(){
-    this.Mesh = new THREE.BoxGeometry(2, 1, 2);
+    this.Mesh = new THREE.BoxGeometry(3, 3, 0.1);
 
     this.ScreenControler = new TvScreen();
     Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler;
@@ -25,23 +25,13 @@ class Box{
 
     //Grav
     //this.Object.position.y -= GravityPush; -- THE CALL TO PUSH OBJECT DOWN VIA GRAV
-    var GravityPush = 0.981 * ( (Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) / 100); // Grav in M/S times the seconds passed between frames
+    //var GravityPush = 0.981 * ( (Galacta.Engine.Delta - Galacta.Engine.PreviousDelta) / 100); // Grav in M/S times the seconds passed between frames
 
     this.Texture.needsUpdate = true;
 
-    //Check Boundings
-    for(var items in Galacta.Engine.Scene.BoundingList){
-      var Area = Galacta.Engine.Scene.BoundingList[items].position.AREA;
+    var time = performance.now() * 0.001;
+    this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
 
-      var BoxX = Area[0];
-      var BoxY = Area[1];
-      var BoxZ = Area[2];
-
-      var time = performance.now() * 0.001;
-      this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
-
-
-    }
   }
 
 

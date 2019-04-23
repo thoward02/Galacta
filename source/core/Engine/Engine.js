@@ -28,10 +28,18 @@ class Engine{
     this.Camera;
     this.PlayerClass;
 
+
     this.Delta = performance.now();
     this.PreviousDelta = this.Delta;
 
-    this.Debug = false; //Enables PC support
+    this.Vr = false; //Enables VR Functions
+    this.Debug = true; //Enables PC support
+
+    if(this.Debug){
+      this.Vr = true;
+    }
+
+
   }
 
   init(){
