@@ -4,7 +4,6 @@
  *
  * Based on @tojiro's vr-samples-utils.js
  */
-console.log("X")
 var WEBVR = {
   button : null,
 	createButton: function ( renderer, options ) {
@@ -29,7 +28,7 @@ var WEBVR = {
 			button.onmouseleave = function () { button.style.opacity = '0.5'; };
 
 			button.onclick = function () {
-        //Galacta.Engine.Vr ? Galacta.Engine.Vr = false : Galacta.Engine.Vr = true;
+        Galacta.Engine.Vr ? Galacta.Engine.Vr = false : Galacta.Engine.Vr = true;
 				device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
 
 			};
