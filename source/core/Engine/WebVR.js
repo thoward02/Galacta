@@ -28,8 +28,10 @@ var WEBVR = {
 			button.onmouseleave = function () { button.style.opacity = '0.5'; };
 
 			button.onclick = function () {
-        Galacta.Engine.Vr = true;
-				device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
+        //Delete Ocean
+        Galacta.Engine.Scene.DeleteOcean();
+
+        device.isPresenting ? device.exitPresent() : device.requestPresent( [ { source: renderer.domElement } ] );
 
 			};
 

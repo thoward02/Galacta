@@ -86,6 +86,9 @@ class MainScene{
 				this.UpdateList[Obj].Update();
 		}
 
+	}
 
+	DeleteOcean(){
+		WaterSetUp.Delete();
 	}
 }

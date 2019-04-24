@@ -71,7 +71,10 @@ class WaterScript{
     this.WaterPlane.rotation._x = -1.5707963267948966;
     this.WaterPlane.rotation._y = 0;
     this.WaterPlane.rotation._z = 0; //
-    
 
+  }
+
+  Delete(){
+    Galacta.Engine.Scene.SObj.remove(this.WaterPlane)
   }
 }
