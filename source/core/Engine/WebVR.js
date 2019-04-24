@@ -4,7 +4,7 @@
  *
  * Based on @tojiro's vr-samples-utils.js
  */
-
+console.log("X")
 var WEBVR = {
   button : null,
 	createButton: function ( renderer, options ) {
