@@ -23,7 +23,7 @@ class Renderer{
 			this.RObj = new THREE.WebGLRenderer( { antialias: true } );
 
 			//Set Setting
-			this.RObj.setPixelRatio( window.devicePixelRatio );
+			//this.RObj.setPixelRatio( window.devicePixelRatio );
 			this.RObj.setSize( 3073, 1536);
 			this.RObj.vr.enabled = true;
 
