@@ -30,7 +30,7 @@ class Box{
     this.Texture.needsUpdate = true;
 
     var time = performance.now() * 0.001;
-    this.Object.position.y = (Math.sin( time ) * 0.5) + 9.5 ;
+    this.Object.position.y = (Math.sin( time ) * 0.5) + 10.5 ;
 
   }
 
