@@ -24,7 +24,7 @@ class WaterScript{
 					sunDirection: this.SunLight.position.clone().normalize(),
 					sunColor: 0xffffff,
 					waterColor: 0x001e0f,
-					distortionScale: 1,
+					distortionScale: 0.5,
 					fog: Galacta.Engine.Scene.SObj.fog !== undefined
 				}
 			);
@@ -67,10 +67,10 @@ class WaterScript{
 
   Update(){
     var time = performance.now() * 0.001;
-    this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
+    this.WaterPlane.material.uniforms[ 'time' ].value += 0.75 / 60.0;
     this.WaterPlane.rotation._x = -1.5707963267948966;
     this.WaterPlane.rotation._y = 0;
-    this.WaterPlane.rotation._z = 0; 
+    this.WaterPlane.rotation._z = 0;
 
   }
 

@@ -46,7 +46,14 @@ class TvScreen{
 
 
     const Now = new Date();
-    const Time = Now.getHours() + ":" + Now.getMinutes() + ":" + Now.getSeconds();
+
+    let DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+
+    let Time = Now.getHours() + ":" + Now.getMinutes() + ":" + Now.getSeconds();
+
+    var DayName = DaysOfWeek[Now.getDay()];
+
+    let Today = Now.getDate() + "/" + Now.getMonth() + "/" + Now.getFullYear();
 
 
     this.ctx.fillStyle = "#2CB9E8";
@@ -54,7 +61,9 @@ class TvScreen{
     this.ctx.textAlign = "center";
     this.ctx.font = "150px Kiona";
 
-    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) );
+    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) - 150 );
+    this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 0 );
+    this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) + 150 );
 
   }
 }

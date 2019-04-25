@@ -73,7 +73,7 @@ THREE.Water = function ( geometry, options ) {
 				"mirrorSampler": { value: null },
 				"alpha": { value: 1.0 },
 				"time": { value: 0.0 },
-				"size": { value: 1.0 },
+				"size": { value: 10.0 },
 				"distortionScale": { value: 20.0 },
 				"textureMatrix": { value: new THREE.Matrix4() },
 				"sunColor": { value: new THREE.Color( 0x7F7F7F ) },
@@ -130,7 +130,7 @@ THREE.Water = function ( geometry, options ) {
 			'		texture2D( normalSampler, uv1 ) +',
 			'		texture2D( normalSampler, uv2 ) +',
 			'		texture2D( normalSampler, uv3 );',
-			'	return noise * 0.5 - 1.0;',
+			'	return noise * 0.7 - 1.0;',
 			'}',
 
 			'void sunLight( const vec3 surfaceNormal, const vec3 eyeDirection, float shiny, float spec, float diffuse, inout vec3 diffuseColor, inout vec3 specularColor ) {',
@@ -150,7 +150,7 @@ THREE.Water = function ( geometry, options ) {
 
 			'void main() {',
 			'	vec4 noise = getNoise( worldPosition.xz * size );',
-			'	vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 1.0, 1.5 ) );',
+			'	vec3 surfaceNormal = normalize( noise.xzy * vec3( 1.5, 5.0, 1.5 ) );',
 
 			'	vec3 diffuseLight = vec3(0.0);',
 			'	vec3 specularLight = vec3(0.0);',
