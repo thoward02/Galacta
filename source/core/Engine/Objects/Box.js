@@ -14,8 +14,12 @@ class Box{
     this.Object.position.x = 0;
     this.Object.position.y = 2.0;
     this.Object.position.z = -10;
+
+    this.Object.rotation.x = 0.4
+
     this.reciveShadow = true;
     this.castShadow = true;
+
 
   }
   ReturnObj(){
@@ -30,7 +34,16 @@ class Box{
     this.Texture.needsUpdate = true;
 
     var time = performance.now() * 0.001;
-  //this.Object.position.y = (Math.sin( time ) * 0.5) + 10.5 ;
+    //this.Object.position.y = (Math.sin( time ) * 0.5) + 10.5 ;
+
+
+
+    //Swing
+    this.Object.rotation.x +=  (Math.sin( time ) * 0.001) - 0.005 ;
+
+
+
+
 
   }
 
