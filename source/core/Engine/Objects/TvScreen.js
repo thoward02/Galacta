@@ -7,7 +7,7 @@ class TvScreen{
     this.ctx = this.element.getContext("2d");
 
     this.element.width = 2048;
-    this.element.height = 1024;
+    this.element.height = 512;
 
     this.x = 0;
     this.y = 0;
@@ -47,13 +47,13 @@ class TvScreen{
 
     const Now = new Date();
 
-    let DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+    let DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'T h u r s d a y', 'Friday', 'Saturday'];
 
     let Time = Now.getHours() + ":" + Now.getMinutes() + ":" + Now.getSeconds();
 
     var DayName = DaysOfWeek[Now.getDay()];
 
-    let Today = Now.getDate() + "/" + Now.getMonth() + "/" + Now.getFullYear();
+    let Today = Now.getDate() + "/" + (Now.getMonth() + 1) + "/" + Now.getFullYear();
 
 
     this.ctx.fillStyle = "#2CB9E8";
@@ -61,9 +61,9 @@ class TvScreen{
     this.ctx.textAlign = "center";
     this.ctx.font = "150px Kiona";
 
-    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) - 150 );
-    this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 0 );
-    this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) + 150 );
+    this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) - 150 );
+    this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 10 );
+    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 210 );
 
   }
 }
