@@ -7,7 +7,7 @@ class TvScreen{
     this.ctx = this.element.getContext("2d");
 
     this.element.width = 2048;
-    this.element.height = 512;
+    this.element.height = 1024;
 
     this.x = 0;
     this.y = 0;
@@ -61,9 +61,9 @@ class TvScreen{
     this.ctx.textAlign = "center";
     this.ctx.font = "150px Kiona";
 
-    this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) - 150 );
+    //this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) - 150 );
     this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 10 );
-    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 210 );
+    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 400 );
 
   }
 }
