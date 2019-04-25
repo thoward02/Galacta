@@ -1,7 +1,7 @@
 class Box{
 
   constructor(){
-    this.Mesh = new THREE.BoxGeometry(3, 3, 0.1);
+    this.Mesh = new THREE.BoxGeometry(6, 3, 0.1);
 
     this.ScreenControler = new TvScreen();
     Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler;

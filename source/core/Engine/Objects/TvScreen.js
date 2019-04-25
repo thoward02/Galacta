@@ -6,15 +6,17 @@ class TvScreen{
     this.element = document.createElement("canvas");
     this.ctx = this.element.getContext("2d");
 
-    this.element.width = 256;
-    this.element.height = 256;
+    this.element.width = 2048;
+    this.element.height = 1024;
 
     this.x = 0;
     this.y = 0;
 
-    this.GoUp = false;
-    this.GoLeft = false
+    this.r = 90;
+    this.g = 247;
+    this.b = 225;
 
+    this.goUp = true;
   }
 
 
@@ -27,24 +29,32 @@ class TvScreen{
 
 
   UpdateCanvas(){
+    //Set up colors
+    if(this.goUp && this.r > 125) this.goUp = false;
+    if(!this.goUp && this.r < 50) this.goUp = true;
 
+    if(this.goUp) this.r++;
+    if(!this.goUp) this.r--;
+
+    //Draw
     this.ctx.clearRect(0,0, this.element.width, this.element.height);
 
-    if(this.y > 256 && !this.GoUp) this.GoUp = true;
-    if(this.y < 0 && this.GoUp) this.GoUp = false;
+    this.ctx.fillStyle = "rgb(" + this.r +","+  this.g +", "+ this.b + ")";
 
-    if(this.x > 256 && !this.GoLeft) this.GoLeft = true;
-    if(this.x < 0 && this.GoLeft ) this.GoLeft = false;
-
-    if(this.GoUp)  this.y -= 0.5;
-    if(!this.GoUp) this.y += 0.5;
+    this.ctx.fillRect(0,0,this.element.width, this.element.height);
 
 
-    if(this.GoLeft)  this.x -= 0.5;
-    if(!this.GoLeft) this.x += 0.5;
 
-    this.ctx.fillStyle = "#FF0000";
-    this.ctx.fillRect(this.x, this.y, (-10), (10) );
+    const Now = new Date();
+    const Time = Now.getHours() + ":" + Now.getMinutes() + ":" + Now.getSeconds();
+
+
+    this.ctx.fillStyle = "#2CB9E8";
+
+    this.ctx.textAlign = "center";
+    this.ctx.font = "150px Kiona";
+
+    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) );
 
   }
 }
