@@ -29,7 +29,7 @@ class WaterScript{
 				}
 			);
 			this.WaterPlane.rotation.x = - Math.PI / 2;
-			this.WaterPlane.position.y = 8.6;
+			this.WaterPlane.position.y = 0;
 			Galacta.Engine.AddObject(this.WaterPlane);
 
 			// this.Skybox
@@ -70,7 +70,7 @@ class WaterScript{
     this.WaterPlane.material.uniforms[ 'time' ].value += 1.0 / 60.0;
     this.WaterPlane.rotation._x = -1.5707963267948966;
     this.WaterPlane.rotation._y = 0;
-    this.WaterPlane.rotation._z = 0; //
+    this.WaterPlane.rotation._z = 0; 
 
   }
 

@@ -12,7 +12,7 @@ class Box{
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
 
     this.Object.position.x = 0;
-    this.Object.position.y = 9.5;
+    this.Object.position.y = 2.0;
     this.Object.position.z = -10;
     this.reciveShadow = true;
     this.castShadow = true;
@@ -30,7 +30,7 @@ class Box{
     this.Texture.needsUpdate = true;
 
     var time = performance.now() * 0.001;
-    this.Object.position.y = (Math.sin( time ) * 0.5) + 10.5 ;
+  //this.Object.position.y = (Math.sin( time ) * 0.5) + 10.5 ;
 
   }
 

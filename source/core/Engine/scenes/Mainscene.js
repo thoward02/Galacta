@@ -32,8 +32,8 @@ class MainScene{
 
 		//Add back lighting to cube
 		var rectLight = new THREE.RectAreaLight( 0xffffff, 2,  10, 5 );
-		rectLight.position.set( 0, 14, 0 );
-		rectLight.lookAt( 0, 9, -10 );
+		rectLight.position.set( 0, 2, 0 );
+		rectLight.lookAt( 0, 2, -10 );
 		this.SObj.add( rectLight )
 
 		var rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
@@ -59,7 +59,7 @@ class MainScene{
 		var Floor = new THREE.Mesh(FloorMesh, FloorMaterial);
 
 		Floor.position.x = 0;
-		Floor.position.y = 8;
+		Floor.position.y = -1;
 		Floor.position.z = 0;
 
 		Floor.reciveShadow = true;
