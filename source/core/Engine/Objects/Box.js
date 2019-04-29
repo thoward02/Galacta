@@ -3,10 +3,10 @@ class Box{
   constructor(){
     this.Mesh = new THREE.BoxGeometry(6, 3, 0.1);
 
-    this.ScreenControler = new TvScreen();
-    Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler;
+    this.ScreenControler1 = new TvScreen();
+    Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler1;
 
-    this.Texture = new THREE.CanvasTexture(this.ScreenControler.element);
+    this.Texture = new THREE.CanvasTexture(this.ScreenControler1.element);
 
     this.Material =  new THREE.MeshBasicMaterial( {map: this.Texture} );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
@@ -15,7 +15,6 @@ class Box{
     this.Object.position.y = 2.0;
     this.Object.position.z = -10;
 
-    this.Object.rotation.x = 0.4
 
     this.reciveShadow = true;
     this.castShadow = true;
@@ -38,8 +37,6 @@ class Box{
 
 
 
-    //Swing
-    this.Object.rotation.x +=  (Math.sin( time ) * 0.001) - 0.005 ;
 
 
 

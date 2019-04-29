@@ -6,6 +6,22 @@ class TvScreen{
     this.element = document.createElement("canvas");
     this.ctx = this.element.getContext("2d");
 
+    this.Online = false;
+
+    //Check if online
+    // --- Online --- //
+    this.OnlineRequest = new XMLHttpRequest();
+
+    this.OnlineRequest.addEventListener("load", function(REQUEST){
+      Galacta.Engine.Scene.BoxObj.ScreenControler1.Online = REQUEST.target.response.online;
+
+    });
+    this.OnlineRequest.open("GET", "/source/api/isOnline.json");
+    this.OnlineRequest.responseType = "json";
+    this.OnlineRequest.send();
+    // --------------- //
+
+    // --- Drawing Stuff ---- //
     this.element.width = 2048;
     this.element.height = 1024;
 
@@ -17,18 +33,77 @@ class TvScreen{
     this.b = 225;
 
     this.goUp = true;
+    //------------------------//
+
+    this.MessageList = []
+
+
   }
 
 
-  //Called by Galacta.Engine.Scene.UpdateList
-  Update(){
-    if(Galacta.Engine.Vr == true){
-      this.UpdateCanvas();
+    //Called by Galacta.Engine.Scene.UpdateList
+    Update(){
+      if(Galacta.Engine.Vr == true){
+        this.UpdateCanvas();
+      }
     }
-  }
 
 
   UpdateCanvas(){
+
+
+    if(this.Online){
+      this.UpdateOnline();
+    }else{
+      this.UpdateOffline()
+    }
+
+
+  }
+
+  UpdateOnline(){
+    //Clear frame for redraw
+    this.ctx.clearRect(0,0, this.element.width, this.element.height);
+
+    //Update Message List
+    let Request = new XMLHttpRequest();
+
+    Request.addEventListener("load", function(REQUEST){
+      Galacta.Engine.Scene.BoxObj.ScreenControler1.MessageList = REQUEST.target.response.Messages;
+
+    });
+    Request.open("GET", "/source/core/api/Discord/DiscordMessages.json");
+    Request.responseType = "json";
+    Request.send();
+
+    //Redraw frame
+    this.ctx.fillStyle = "white";
+
+    this.ctx.textAlign = "center";
+    this.ctx.font = "40px Kiona";
+
+    //No messages
+    if(this.MessageList.length == 0){
+      this.ctx.fillText("No messages", (this.element.width / 2) , (this.element.height / 2) + 10 );
+    }else{
+      let Count = -250;
+      for(Object in this.MessageList){
+
+        let Name = this.MessageList[Object].Name;
+        let MLen = this.MessageList[Object].MLen;
+        this.ctx.fillText((Name + " : "+ MLen), (this.element.width / 2) , (this.element.height / 2) + Count );
+
+        Count += 50;
+      }
+
+      }
+
+
+
+  }
+
+
+  UpdateOffline(){
     //Set up colors
     if(this.goUp && this.r > 125) this.goUp = false;
     if(!this.goUp && this.r < 50) this.goUp = true;
@@ -53,17 +128,16 @@ class TvScreen{
 
     var DayName = DaysOfWeek[Now.getDay()];
 
-    let Today = Now.getDate() + "/" + (Now.getMonth() + 1) + "/" + Now.getFullYear();
-
 
     this.ctx.fillStyle = "#2CB9E8";
 
     this.ctx.textAlign = "center";
     this.ctx.font = "150px Kiona";
 
-    //this.ctx.fillText(Today, (this.element.width / 2) , (this.element.height / 2) - 150 );
     this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 10 );
     this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 400 );
-
+    this.ctx.fillText(this.Online, (this.element.width / 2) , (this.element.height / 2) + 200 );
   }
+
+
 }

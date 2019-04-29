@@ -42,7 +42,8 @@ class MainScene{
 
 		//Add test object
 		//Create Box
-		var BoxObj = new Box();
+		this.BoxObj = new Box();
+		var BoxObj = this.BoxObj;
 		var BoxMesh = BoxObj.ReturnObj();
 		this.SObj.add(BoxMesh);
 

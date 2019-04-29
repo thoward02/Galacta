@@ -13,153 +13,48 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //File System
 var fs = require("fs");
 
-/**
-*  -- Pathing --
-*  protocol://host/resources/models/q?=MODELNAME = PATH for calling a model, fbx format, MODELNAME == Modelfilename
-*
-*  protocol://host/ = Main Page
-*
-*  -- Commands --
-*  app.get(PathOnServer, FunctionToBeRan(usersrequest, responsetobesent); // when ever the server gets a "GET" request, the server will check and see if the path declared before matches what you declared in your script
-*
-**/
+//Child proc
+const { spawn } = require('child_process')
+child = null;
 
+app.use("/source/core", express.static("source/core"));
+app.use("/source/core/Engine", express.static("/source/core/Engine"));
+app.use("/source/core/Engine/Objects", express.static("/source/core/Engine/Objects"));
+app.use("/source/core/Engine/scenes", express.static("/source/core/Engine/scenes"));
 
-//Host Play file
-app.get("/Galacta", function(request, response){
+app.use("/source/core/Resources/Audio", express.static("/source/core/Resources/Audio"));
+app.use("/source/core/Resources/CssSheets", express.static("/source/core/Resources/CssSheets"));
+app.use("/source/core/Resources/Images", express.static("/source/core/Resources/Images"));
 
-  console.log("[ -- A User Started Playing -- ]");
-  //This will let people play home in their browser C:
-  fs.readFile("./index.html", function(err, data){
-    if(err){
-      console.log("[ -- User Incountered an err: "+ err +" -- ]");
-      response.end(err);
-    }else{
-      response.end(data);
+app.use("/source/core/api/Discord" , express.static("/source/core/api/Discord"));
+
+app.get("/", function(request, response){
+  //Sets up our home page, to grab all requests.
+  fs.readFile("index.html", function(err, data){
+    if(err) {
+      console.log("error: "+String(err));
+      response.end("error: "+String(err));
     }
-
-  });
-});
-
-
-
-/**
-*
-* RESOURCE SECTION
-*
-**/
-
-//For Loading Core System Files files from ./source
-app.get("/source/core/q&=:file", function(request, response){
-  //Fetch File
-  var File = request.params.file;
-  var FilePath = "./source/core/"+File;
-
-  //Load File
-  fs.readFile(FilePath, function(err, data){
-    if(err){
-      console.log("[ -- User hit Err: "+err+", While Loading "+ FilePath +"-- ]");
-    }else{
-      response.end(data);
+    else {
+      console.log("[-- Loading Main Page For User --]")
+      response.end(data); //.end so that the pc stops
     }
   });
-});
 
-//For loading Engine files
-app.get("/source/core/Engine/q&=:file", function(request, response){
-  //Fetch File
-  var File = request.params.file;
-  var FilePath = "./source/core/Engine/"+File;
-
-  //Load File
-  fs.readFile(FilePath, function(err, data){
-    if(err){
-      console.log("[ -- User hit Err: "+err+", While Loading "+ FilePath +"-- ]");
-    }else{
-      response.end(data);
-    }
-  });
-});
-
-app.get("/source/core/Engine/Objects/q&=:file", function(request, response){
-  //Fetch File
-  var File = request.params.file;
-  var FilePath = "./source/core/Engine/Objects/"+File;
-
-  //Load File
-  fs.readFile(FilePath, function(err, data){
-    if(err){
-      console.log("[ -- User hit Err: "+err+", While Loading "+ FilePath +"-- ]");
-    }else{
-      response.end(data);
-    }
-  });
 });
 
 
+app.get("/source/api/isOnline.json", function(request, response){
 
-//Load Models
+  response.end('{ "online" : true}');
 
-app.get("/resources/models/q&=:scene/q&=:model", function(request, response){
-  //Set up Model Vars along with pathing
-  var model = request.params.model;
-  var scene = request.params.scene;
-  var pathing = "./source/"+ String(scene) +"/models/"+ String(model) +".fbx";
-
-  //Fetch File and return it
-  fs.readFile(pathing, function(err, data){
-    if(err){
-      console.log(err);
-      response.end("<html>"+err+"</html>");
-    }else{
-      response.end(data);
-    }
-
-  });
 });
 
-
-/**
-*
-* LOAD SCENES
-*
-**/
-
-//Load Core Scene Files
-app.get("/source/q&=:scene/q&=:file", function(request ,response){
-  //Fetch File names
-  var scene = request.params.scene;
-  var file = request.params.file;
-
-  //Load File
-  fs.readFile("./source/"+ scene +"/"+ file +"", function(err, data){
-    if(err){
-      console.log("[ -- User hit Err: "+err+", While Loading "+ scene +"/"+  file  +"-- ]");
-    }else{
-      response.end(data);
-    }
-  });
-});
-
-
-
-
-
-//If req outside bounds stated here, return to home page
-app.get("*", function(request, response){
-  if(String(request.url) != "/favicon.ico"){
-    //Chrome trys to get websites to include icons to represent their sites. Since the icon is accessed with an http req this function picks it up
-    //Basically the if statements stops clutter in the server log
-    console.log("[-- User Attempted To Load Unindexed Command : Unindexed Command = "+String(request.url)+" --]")
-  }
-
-  //Will catch any unindexed get requests
-  response.redirect("/"); //return home
-});
 
 //Start app on port 80, local host
-app.listen("2000", "127.0.0.1", function(){
+app.listen("80", "127.0.0.1", function(){
 
   console.log("[-- Started --]");
+
 
 });
