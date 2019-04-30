@@ -25,9 +25,12 @@ class TvScreen{
     this.element.width = 2048;
     this.element.height = 1024;
 
+    this.DrawTool = new DrawTool(this.ctx, this.element);
+
     this.x = 0;
     this.y = 0;
 
+    //For colour pulse
     this.r = 90;
     this.g = 247;
     this.b = 225;
@@ -76,27 +79,35 @@ class TvScreen{
     Request.responseType = "json";
     Request.send();
 
+    // ---------- DRAW --------------//
     //Redraw frame
-    this.ctx.fillStyle = "white";
+    this.ctx.fillStyle = "cyan";
 
-    this.ctx.textAlign = "center";
     this.ctx.font = "40px Kiona";
 
+    this.ctx.textAlign = "left";
     //No messages
     if(this.MessageList.length == 0){
-      this.ctx.fillText("No messages", (this.element.width / 2) , (this.element.height / 2) + 10 );
+      this.DrawTool.DrawNoMessages();
     }else{
+
+      //Draw message background
+      this.DrawTool.DrawMessages();
+      this.ctx.fillStyle = "black";
+
       let Count = -250;
       for(Object in this.MessageList){
+        this.ctx.font = "40px Kiona";
 
         let Name = this.MessageList[Object].Name;
         let MLen = this.MessageList[Object].MLen;
-        this.ctx.fillText((Name + " : "+ MLen), (this.element.width / 2) , (this.element.height / 2) + Count );
+        this.ctx.fillText((Name + " : "+ MLen), (this.element.width / 15) , (this.element.height / 2) + Count );
 
         Count += 50;
-      }
 
       }
+
+    }
 
 
 
@@ -138,6 +149,75 @@ class TvScreen{
     this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 400 );
     this.ctx.fillText(this.Online, (this.element.width / 2) , (this.element.height / 2) + 200 );
   }
+
+
+}
+
+
+
+
+
+
+//Drawing Tool
+
+class DrawTool{
+
+  constructor(ctx, element){
+
+    this.ctx = ctx;
+    this.element = element;
+
+    this.LeftSide = {
+
+      DrawLeftSide : function(ctx, element){
+        this.ctx = ctx;
+        this.element = element;
+
+        let Width = (this.element.width / 5) * 1.5;
+        let Height = this.element.height;
+
+        let BColour = "cyan";
+        let FColour = "black"
+
+        //DRAW Background
+        this.ctx.fillStyle = BColour;
+        this.ctx.fillRect(0, 0, Width, Height);
+
+
+        //Draw Message Label
+        this.ctx.fillStyle = FColour;
+        this.ctx.fontStyle = "120px  Kiona";
+        this.ctx.fillText("-= Messages =-", (this.element.width / 15) , 100);
+
+
+      },
+
+      MessageMarginTop: 100,
+      MessageMarginLeft: 200
+    }
+
+
+  }
+
+  DrawNoMessages(){
+
+    this.LeftSide.DrawLeftSide(this.ctx, this.element);
+    this.ctx.fillText("No messages", (this.element.width / 2) , (this.element.height / 2) + 10 );
+
+
+  }
+
+  DrawMessages(){
+    this.LeftSide.DrawLeftSide(this.ctx, this.element);
+
+  }
+
+
+
+
+
+
+
 
 
 }
