@@ -16,7 +16,7 @@ class TvScreen{
       Galacta.Engine.Scene.BoxObj.ScreenControler1.Online = REQUEST.target.response.online;
 
     });
-    this.OnlineRequest.open("GET", "/source/api/isOnline.json");
+    this.OnlineRequest.open("GET", "/source/core/api/isOnline.json");
     this.OnlineRequest.responseType = "json";
     this.OnlineRequest.send();
     // --------------- //
