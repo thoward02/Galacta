@@ -10,12 +10,17 @@ class TvScreen{
 
     //Check if online
     // --- Online --- //
+    if(Galacta.Engine.debug == true){
+      this.Header = "";
+    }else{
+      this.Header = "Galacta"
+    }
     this.OnlineRequest = new XMLHttpRequest();
 
     this.OnlineRequest.addEventListener("load", function(REQUEST){
       Galacta.Engine.Scene.BoxObj.ScreenControler1.Online = REQUEST.target.response.isOnline;
     });
-    this.OnlineRequest.open("GET", "/source/core/api/isOnline.json");
+    this.OnlineRequest.open("GET", this.Header+"/source/core/api/isOnline.json");
     this.OnlineRequest.responseType = "json";
     this.OnlineRequest.send();
     // --------------- //
@@ -74,7 +79,7 @@ class TvScreen{
       Galacta.Engine.Scene.BoxObj.ScreenControler1.MessageList = REQUEST.target.response.Messages;
 
     });
-    Request.open("GET", "/source/core/api/Discord/DiscordMessages.json");
+    Request.open("GET", this.Header+"/source/core/api/Discord/DiscordMessages.json");
     Request.responseType = "json";
     Request.send();
 
