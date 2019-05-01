@@ -92,17 +92,16 @@ class TvScreen{
 
       //Draw message background
       this.DrawTool.DrawMessages();
-      this.ctx.fillStyle = "black";
 
-      let Count = -250;
+      let Count = -300;
       for(Object in this.MessageList){
-        this.ctx.font = "40px Kiona";
+        this.ctx.font = "50px Kiona";
 
         let Name = this.MessageList[Object].Name;
         let MLen = this.MessageList[Object].MLen;
-        this.ctx.fillText((Name + " : "+ MLen), (this.element.width / 15) , (this.element.height / 2) + Count );
+        this.ctx.fillText((Name + " : "+ MLen), (this.element.width * 0.02) , (this.element.height / 2) + Count );
 
-        Count += 50;
+        Count += 100;
 
       }
 
@@ -175,8 +174,8 @@ class DrawTool{
         let Width = (this.element.width / 5) * 1.5;
         let Height = this.element.height;
 
-        let BColour = "cyan";
-        let FColour = "black"
+        let BColour = "#2c2f33";
+        let FColour = "#ffffff";
 
         //DRAW Background
         this.ctx.fillStyle = BColour;
@@ -185,8 +184,8 @@ class DrawTool{
 
         //Draw Message Label
         this.ctx.fillStyle = FColour;
-        this.ctx.fontStyle = "120px  Kiona";
-        this.ctx.fillText("-= Messages =-", (this.element.width / 15) , 100);
+        this.ctx.font = "50px Kiona";
+        this.ctx.fillText("-= Messages =-", (this.element.width / 20) , 100);
 
 
       },
