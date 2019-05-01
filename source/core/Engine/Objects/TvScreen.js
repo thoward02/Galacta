@@ -85,15 +85,19 @@ class TvScreen{
     this.ctx.font = "40px Kiona";
 
     this.ctx.textAlign = "left";
+
     //No messages
     if(this.MessageList.length == 0){
+
       this.DrawTool.DrawNoMessages();
+
     }else{
 
       //Draw message background
       this.DrawTool.DrawMessages();
 
       let Count = -300;
+      //For each message
       for(Object in this.MessageList){
         this.ctx.font = "50px Kiona";
 
