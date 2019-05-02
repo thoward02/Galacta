@@ -13,14 +13,14 @@ class TvScreen{
     if(Galacta.Engine.debug == true){
       this.Header = "";
     }else{
-      this.Header = "Galacta"
+      this.Header = "/Galacta"
     }
     this.OnlineRequest = new XMLHttpRequest();
 
     this.OnlineRequest.addEventListener("load", function(REQUEST){
       Galacta.Engine.Scene.BoxObj.ScreenControler1.Online = REQUEST.target.response.isOnline;
     });
-    this.OnlineRequest.open("GET", "/source/core/api/isOnline.json");
+    this.OnlineRequest.open("GET", this.Header+"/source/core/api/isOnline.json");
     this.OnlineRequest.responseType = "json";
     this.OnlineRequest.send();
     // --------------- //
