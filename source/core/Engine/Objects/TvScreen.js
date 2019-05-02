@@ -34,12 +34,6 @@ class TvScreen{
     this.x = 0;
     this.y = 0;
 
-    //For colour pulse
-    this.r = 90;
-    this.g = 247;
-    this.b = 225;
-
-    this.goUp = true;
     //------------------------//
 
     this.MessageList = []
@@ -93,7 +87,6 @@ class TvScreen{
 
     //No messages
     if(this.MessageList.length == 0){
-
       this.DrawTool.DrawNoMessages();
 
     }else{
@@ -122,21 +115,6 @@ class TvScreen{
 
 
   UpdateOffline(){
-    //Set up colors
-    if(this.goUp && this.r > 125) this.goUp = false;
-    if(!this.goUp && this.r < 50) this.goUp = true;
-
-    if(this.goUp) this.r++;
-    if(!this.goUp) this.r--;
-
-    //Draw
-    this.ctx.clearRect(0,0, this.element.width, this.element.height);
-
-    this.ctx.fillStyle = "rgb(" + this.r +","+  this.g +", "+ this.b + ")";
-
-    this.ctx.fillRect(0,0,this.element.width, this.element.height);
-
-
 
     const Now = new Date();
 
@@ -202,7 +180,14 @@ class DrawTool{
       MessageMarginTop: 100,
       MessageMarginLeft: 200
     }
+    this.RightSide = {
+      DrawRightSide : function(ctx, element){
+        this.ctx = ctx;
+        this.element = element;
 
+        let Width = (this.element.width / 5)
+      }
+    }
 
   }
 
@@ -215,7 +200,10 @@ class DrawTool{
   }
 
   DrawMessages(){
+
     this.LeftSide.DrawLeftSide(this.ctx, this.element);
+    this.RightSide.DrawRightSide(this.ctx, this.element);
+
 
   }
 
