@@ -79,7 +79,7 @@ class TvScreen{
       Galacta.Engine.Scene.BoxObj.ScreenControler1.MessageList = REQUEST.target.response.Messages;
 
     });
-    Request.open("GET", "/source/core/api/Discord/DiscordMessages.json");
+    Request.open("GET", this.Header+"/source/core/api/Discord/DiscordMessages.json");
     Request.responseType = "json";
     Request.send();
 
