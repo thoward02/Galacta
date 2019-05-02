@@ -26,8 +26,8 @@ class TvScreen{
     // --------------- //
 
     // --- Drawing Stuff ---- //
-    this.element.width = 2048;
-    this.element.height = 1024;
+    this.element.width = 4096;
+    this.element.height = 2048;
 
     this.DrawTool = new DrawTool(this.ctx, this.element);
 
