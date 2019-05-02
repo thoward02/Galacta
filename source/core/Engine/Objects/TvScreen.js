@@ -81,12 +81,12 @@ class TvScreen{
     //Redraw frame
     if(this.MessageList.length == 0){
       //No messages
-      this.DrawTool.DrawNoMessages();
+      this.DrawTool.DrawNoMessageBackground();
 
     }else{
 
       //Draw message background
-      this.DrawTool.DrawMessages();
+      this.DrawTool.DrawMessageBackground();
 
       let Count = -300;
       //For each message
@@ -185,7 +185,7 @@ class DrawTool{
 
   }
 
-  DrawNoMessages(){
+  DrawNoMessageBackground(){
 
     this.LeftSide.DrawLeftSide(this.ctx, this.element);
     this.ctx.fillText("No messages", (this.element.width / 2) , (this.element.height / 2) + 10 );
@@ -193,7 +193,7 @@ class DrawTool{
 
   }
 
-  DrawMessages(){
+  DrawMessageBackground(){
 
     this.LeftSide.DrawLeftSide(this.ctx, this.element);
     this.RightSide.DrawRightSide(this.ctx, this.element);
