@@ -79,14 +79,8 @@ class TvScreen{
 
     // ---------- DRAW --------------//
     //Redraw frame
-    this.ctx.fillStyle = "cyan";
-
-    this.ctx.font = "40px Kiona";
-
-    this.ctx.textAlign = "left";
-
-    //No messages
     if(this.MessageList.length == 0){
+      //No messages
       this.DrawTool.DrawNoMessages();
 
     }else{
