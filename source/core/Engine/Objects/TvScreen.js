@@ -72,6 +72,7 @@ class TvScreen{
 
 
   UpdateCanvas(){
+    console.log("UPDATE");
     //Clear Context
     this.ctx.clearRect(0, 0, this.element.width, this.element.height);
 
