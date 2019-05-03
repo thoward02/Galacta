@@ -1,3 +1,4 @@
+//Rewritten TVScreen
 
 class TvScreen{
 
@@ -6,15 +7,19 @@ class TvScreen{
     this.element = document.createElement("canvas");
     this.ctx = this.element.getContext("2d");
 
+
+    // --- Online --- //
     this.Online = false;
 
-    //Check if online
-    // --- Online --- //
+    //Check if debug. If debug, no need for galacta headee
     if(Galacta.Engine.debug == true){
       this.Header = "";
     }else{
       this.Header = "/Galacta"
     }
+    // -------------- //
+
+    // ---- Static Check for first creation ----- //
     this.OnlineRequest = new XMLHttpRequest();
 
     this.OnlineRequest.addEventListener("load", function(REQUEST){
@@ -23,11 +28,11 @@ class TvScreen{
     this.OnlineRequest.open("GET", this.Header+"/source/core/api/isOnline.json");
     this.OnlineRequest.responseType = "json";
     this.OnlineRequest.send();
-    // --------------- //
+    // ------------------------------------------ //
 
     // --- Drawing Stuff ---- //
-    this.element.width = 4096;
-    this.element.height = 2048;
+    this.element.width = 2048;
+    this.element.height = 1024;
 
     this.DrawTool = new DrawTool(this.ctx, this.element);
 
@@ -38,35 +43,20 @@ class TvScreen{
 
     this.MessageList = []
 
+  }
+
+
+  Update(){
+    this.UpdateNetworking();
+
+    this.UpdateCanvas();
 
   }
 
 
-    //Called by Galacta.Engine.Scene.UpdateList
-    Update(){
-      if(Galacta.Engine.Vr == true){
-        this.UpdateCanvas();
-      }
-    }
+  UpdateNetworking(){
 
-
-  UpdateCanvas(){
-
-
-    if(this.Online){
-      this.UpdateOnline();
-    }else{
-      this.UpdateOffline()
-    }
-
-
-  }
-
-  UpdateOnline(){
-    //Clear frame for redraw
-    this.ctx.clearRect(0,0, this.element.width, this.element.height);
-
-    //Update Message List
+    // --- DISCORD UPDATE ----//
     let Request = new XMLHttpRequest();
 
     Request.addEventListener("load", function(REQUEST){
@@ -77,11 +67,21 @@ class TvScreen{
     Request.responseType = "json";
     Request.send();
 
-    // ---------- DRAW --------------//
-    //Redraw frame
+
+  }
+
+
+  UpdateCanvas(){
+    //Clear Context
+    this.ctx.clearRect(0, 0, this.element.width, this.element.height);
+
+    //Draw left side, and it's messages
+    this.DrawTool.LeftSide.Draw();
+
+    // ------ DRAW MESSAGES --------- //
+    //No messages
     if(this.MessageList.length == 0){
-      //No messages
-      this.DrawTool.DrawNoMessageBackground();
+      this.DrawTool.LeftSide.DrawNoMessages();
 
     }else{
 
@@ -99,34 +99,13 @@ class TvScreen{
 
         Count += 100;
 
-      }
+      } //end of for
 
-    }
-
-
-
-  }
+    } //end of else
+    // ------------------------------------------- //
 
 
-  UpdateOffline(){
 
-    const Now = new Date();
-
-    let DaysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'T h u r s d a y', 'Friday', 'Saturday'];
-
-    let Time = Now.getHours() + ":" + Now.getMinutes() + ":" + Now.getSeconds();
-
-    var DayName = DaysOfWeek[Now.getDay()];
-
-
-    this.ctx.fillStyle = "#2CB9E8";
-
-    this.ctx.textAlign = "center";
-    this.ctx.font = "150px Kiona";
-
-    this.ctx.fillText(DayName, (this.element.width / 2) , (this.element.height / 2) + 10 );
-    this.ctx.fillText(Time, (this.element.width / 2) , (this.element.height / 2) + 400 );
-    this.ctx.fillText(this.Online, (this.element.width / 2) , (this.element.height / 2) + 200 );
   }
 
 
@@ -134,10 +113,6 @@ class TvScreen{
 
 
 
-
-
-
-//Drawing Tool
 
 class DrawTool{
 
@@ -148,7 +123,7 @@ class DrawTool{
 
     this.LeftSide = {
 
-      DrawLeftSide : function(ctx, element){
+      Draw : function(ctx, element){
         this.ctx = ctx;
         this.element = element;
 
@@ -170,16 +145,43 @@ class DrawTool{
 
 
       },
-
-      MessageMarginTop: 100,
-      MessageMarginLeft: 200
-    }
-    this.RightSide = {
-      DrawRightSide : function(ctx, element){
+      DrawNoMessages: function(ctx, element){
         this.ctx = ctx;
         this.element = element;
 
-        let Width = (this.element.width / 5)
+        let Width = (this.element.width / 5) * 1.5;
+        let Height = this.element.height;
+
+        let BColour = "#2c2f33";
+        let FColour = "#ffffff";
+
+        //DRAW Background
+        this.ctx.fillStyle = BColour;
+        this.ctx.fillRect(0, 0, Width, Height);
+
+
+        //Draw Message Label
+        this.ctx.fillStyle = FColour;
+        this.ctx.font = "50px Kiona";
+        this.ctx.fillText("-= Messages =-", (this.element.width / 20) , 100);
+
+        //Draw no messages
+        let Message = "No messages at this time...";
+
+        this.ctx.fillText(Message, (this.element.width / 20) , 100);
+      },
+      MessageMarginTop: 100,
+      MessageMarginLeft: 200
+    },
+
+
+    this.RightSide = {
+      Draw : function(ctx, element){
+        this.ctx = ctx;
+        this.element = element;
+
+        let Width = (this.element.width / 5);
+
       }
     }
 
