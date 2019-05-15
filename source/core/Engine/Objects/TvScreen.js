@@ -47,7 +47,6 @@ class TvScreen{
 
 
   Update(){
-    console.log("Log 1")
     this.UpdateNetworking();
 
     this.UpdateCanvas();
