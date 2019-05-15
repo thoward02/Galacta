@@ -4,9 +4,8 @@ class Box{
     this.Mesh = new THREE.BoxGeometry(6, 3, 0.1);
 
 
-    this.Texture = new THREE.CanvasTexture();
 
-    this.Material =  new THREE.MeshBasicMaterial( {map: this.Texture} );
+    this.Material =  new THREE.MeshBasicMaterial( {color:  0x001e0f} );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
 
     this.Object.position.x = 0;
