@@ -1,5 +1,5 @@
 //Rewritten TVScreen
-
+/**
 class TvScreen{
 
   constructor(){
@@ -197,3 +197,4 @@ class DrawTool{
 
 
 }
+**/
