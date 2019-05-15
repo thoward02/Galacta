@@ -58,10 +58,15 @@ class WaterScript{
 			this.SunLight.position.y = this.parameters.distance * Math.sin( phi ) * Math.sin( theta );
 			this.SunLight.position.z = this.parameters.distance * Math.sin( phi ) * Math.cos( theta );
 
+      this.CubeCamera.update(Galacta.Engine.Renderer.RObj, this.Sky );
 			this.Sky.material.uniforms[ 'sunPosition' ].value = this.SunLight.position.copy( this.SunLight.position );
-			/**this.WaterPlane.material.uniforms[ 'sunDirection' ].value.copy( this.SunLight.position ).normalize();
+
+
+
+
+
+      /**this.WaterPlane.material.uniforms[ 'sunDirection' ].value.copy( this.SunLight.position ).normalize();
       **/
-			this.CubeCamera.update(Galacta.Engine.Renderer.RObj, this.Sky );
 
   }
 
