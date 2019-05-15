@@ -188,22 +188,6 @@ class DrawTool{
 
   }
 
-  DrawNoMessageBackground(){
-
-    this.LeftSide.DrawLeftSide(this.ctx, this.element);
-    this.ctx.fillText("No messages", (this.element.width / 2) , (this.element.height / 2) + 10 );
-
-
-  }
-
-  DrawMessageBackground(){
-
-    this.LeftSide.DrawLeftSide(this.ctx, this.element);
-    this.RightSide.DrawRightSide(this.ctx, this.element);
-
-
-  }
-
 
 
 

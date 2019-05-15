@@ -3,10 +3,8 @@ class Box{
   constructor(){
     this.Mesh = new THREE.BoxGeometry(6, 3, 0.1);
 
-    this.ScreenControler1 = new TvScreen();
-    Galacta.Engine.Scene.UpdateList[Galacta.Engine.Scene.UpdateList.length] = this.ScreenControler1;
-
-    this.Texture = new THREE.CanvasTexture(this.ScreenControler1.element);
+  
+    this.Texture = new THREE.CanvasTexture();
 
     this.Material =  new THREE.MeshBasicMaterial( {map: this.Texture} );
     this.Object = new THREE.Mesh(this.Mesh, this.Material);
