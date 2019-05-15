@@ -11,7 +11,7 @@ class WaterScript{
     this.SunLight = new THREE.DirectionalLight( 0xffffff, 0.8 );
 		Galacta.Engine.Scene.SObj.add( this.SunLight );
 		// Water
-		var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
+		/**var waterGeometry = new THREE.PlaneBufferGeometry( 10000, 10000 );
 		this.WaterPlane = new THREE.Water(
 			waterGeometry,
 				{
@@ -31,7 +31,7 @@ class WaterScript{
 			this.WaterPlane.rotation.x = - Math.PI / 2;
 			this.WaterPlane.position.y = 0;
 			Galacta.Engine.AddObject(this.WaterPlane);
-
+      **/
 			// this.Skybox
 			this.Sky = new THREE.Sky();
 
@@ -66,15 +66,19 @@ class WaterScript{
   }
 
   Update(){
+    /**
     var time = performance.now() * 0.001;
     this.WaterPlane.material.uniforms[ 'time' ].value += 0.75 / 60.0;
     this.WaterPlane.rotation._x = -1.5707963267948966;
     this.WaterPlane.rotation._y = 0;
     this.WaterPlane.rotation._z = 0;
+    **/
 
   }
 
   Delete(){
-    Galacta.Engine.Scene.SObj.remove(this.WaterPlane)
+    /**
+    Galacta.Engine.Scene.SObj.remove(this.WaterPlane);
+    **/
   }
 }
