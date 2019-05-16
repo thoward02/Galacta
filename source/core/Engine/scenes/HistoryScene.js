@@ -22,7 +22,7 @@ class MainScene{
 		this.BoundingList = [];
 
 		this.Loader = new THREE.FBXLoader();
-		this.Loader.load("./Galacta/source/core/Engine/scenes/models/HistoryProject.fbx", function(OBJ){
+		this.Loader.load("./source/core/Engine/scenes/models/HistoryProject.fbx", function(OBJ){
 			//Set up our scene
 
 			for(var Object in OBJ.children){
