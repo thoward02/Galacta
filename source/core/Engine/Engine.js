@@ -32,12 +32,12 @@ class Engine{
     this.Delta = performance.now();
     this.PreviousDelta = this.Delta;
 
-    this.Vr = true; //Enables VR Functions
+    this.Vr = false; //Enables VR Functions
 
     this.Debug = true; //Enables PC support
 
     if(this.Debug){
-      this.Vr = true;
+      this.Vr = false;
     }
 
 

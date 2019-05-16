@@ -20,6 +20,17 @@ class MainScene{
 		this.SObj = new THREE.Scene;
 		this.UpdateList = [];
 		this.BoundingList = [];
+
+		this.Loader = new THREE.FBXLoader();
+		this.Loader.load("/source/core/Engine/scenes/models/HistoryProject.fbx", function(OBJ){
+			//Set up our scene
+
+			for(var Object in OBJ.children){
+				OBJ.children[Object].castShadow = true;
+				OBJ.children[Object].reciveShadow = true;
+			}
+			Galacta.Engine.AddObject(OBJ);
+		});
 	}
 
 	LoadTestScene(){
@@ -30,24 +41,10 @@ class MainScene{
 		//Add Water and Sun to update list
 		this.UpdateList[this.UpdateList.length] = WaterSetUp;
 
-		//Add back lighting to cube
-		var rectLight = new THREE.RectAreaLight( 0xffffff, 2,  10, 5 );
-		rectLight.position.set( 0, 2, 0 );
-		rectLight.lookAt( 0, 2, -10 );
-		this.SObj.add( rectLight )
-
-		var rectLightHelper = new THREE.RectAreaLightHelper( rectLight );
-		rectLight.add( rectLightHelper );
 
 
-		//Add test object
-		//Create Box
-		this.BoxObj = new Box();
-		var BoxObj = this.BoxObj;
-		var BoxMesh = BoxObj.ReturnObj();
-		this.SObj.add(BoxMesh);
 
-		this.UpdateList[this.UpdateList.length] = BoxObj;
+
 
 		//lOAD FLOOR
 		var FloorX = 100;
@@ -78,7 +75,7 @@ class MainScene{
 		Floor.position.AREA = [FloorXArea, FloorYArea, FloorZArea];
 
 		this.BoundingList[this.BoundingList.length] = Floor;
-		this.SObj.add(Floor)
+		//this.SObj.add(Floor)
 
 	}
 
@@ -89,7 +86,5 @@ class MainScene{
 
 	}
 
-	DeleteOcean(){
-		WaterSetUp.Delete();
-	}
+
 }

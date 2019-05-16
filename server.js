@@ -21,6 +21,7 @@ app.use("/source/core", express.static("source/core"));
 app.use("/source/core/Engine", express.static("/source/core/Engine"));
 app.use("/source/core/Engine/Objects", express.static("/source/core/Engine/Objects"));
 app.use("/source/core/Engine/scenes", express.static("/source/core/Engine/scenes"));
+app.use("/source/core/Engine/scenes/models", express.static("/source/core/Engine/scenes/models"));
 
 app.use("/source/core/Resources/Audio", express.static("/source/core/Resources/Audio"));
 app.use("/source/core/Resources/CssSheets", express.static("/source/core/Resources/CssSheets"));

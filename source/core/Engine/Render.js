@@ -25,7 +25,7 @@ class Renderer{
 			//Set Setting
 			//this.RObj.setPixelRatio( window.devicePixelRatio );
 			this.RObj.setSize( 3073, 1536);
-			this.RObj.vr.enabled = true;
+			//this.RObj.vr.enabled = true;
 
 
 			//Append Renderer
@@ -36,7 +36,7 @@ class Renderer{
 			//Set Setting
 			this.RObj.setPixelRatio( window.devicePixelRatio );
 			this.RObj.setSize( window.innerWidth, window.innerHeight )
-			this.RObj.vr.enabled = true;
+			//this.RObj.vr.enabled = true;
 
 			//Append Renderer
 			document.body.appendChild( WEBVR.createButton(this.RObj) );
