@@ -23,26 +23,58 @@ class MainScene{
 
 		this.Loader = new THREE.FBXLoader();
 		this.Loader.load("./source/core/Engine/scenes/models/HistoryProject.fbx", function(OBJ){
+			console.log(OBJ);
 			//Set up our scene
-
 			for(var Object in OBJ.children){
 				OBJ.children[Object].castShadow = true;
 				OBJ.children[Object].reciveShadow = true;
 			}
 			Galacta.Engine.AddObject(OBJ);
 		});
+
+
+		this.effectController  = {
+					turbidity: 10,
+					rayleigh: 2,
+					mieCoefficient: 0.005,
+					mieDirectionalG: 0.8,
+					luminance: 0.5,
+					inclination: 0.49, // elevation / inclination
+					azimuth: 0.4, // Facing front,
+					sun: ! true
+		};
 	}
+
 
 	LoadTestScene(){
 
-		//Set Up Water
-		var WaterSetUp = new WaterScript();
-		WaterSetUp.Setup();
-		//Add Water and Sun to update list
-		this.UpdateList[this.UpdateList.length] = WaterSetUp;
+		//Set Up sky
+		this.Sky = new THREE.Sky();
+		this.Sky.scale.setScalar( 450000 );
+		Galacta.Engine.AddObject(this.Sky);
+		// Add Sun Helper
+		let distance = 400000;
+		let SunObj = new THREE.Mesh(
+			new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+			new THREE.MeshBasicMaterial( { color: 0xffffff } )
+		);
+		SunObj.position.y = - 700000;
+		SunObj.visible = false;
+		Galacta.Engine.AddObject(SunObj);
 
-
-
+		let uniforms = this.Sky.material.uniforms;
+		uniforms[ "turbidity" ].value = this.effectController.turbidity;
+		uniforms[ "rayleigh" ].value = this.effectController.rayleigh;
+		uniforms[ "luminance" ].value = this.effectController.luminance;
+		uniforms[ "mieCoefficient" ].value = this.effectController.mieCoefficient;
+		uniforms[ "mieDirectionalG" ].value = this.effectController.mieDirectionalG;
+		var theta = Math.PI * ( this.effectController.inclination - 0.5 );
+		var phi = 2 * Math.PI * ( this.effectController.azimuth - 0.5 );
+		SunObj.position.x = distance * Math.cos( phi );
+		SunObj.position.y = distance * Math.sin( phi ) * Math.sin( theta );
+		SunObj.position.z = distance * Math.sin( phi ) * Math.cos( theta );
+		SunObj.visible = this.effectController.sun;
+		uniforms[ "sunPosition" ].value.copy( SunObj.position );
 
 
 

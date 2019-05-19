@@ -20,13 +20,35 @@ class MainScene{
 		this.SObj = new THREE.Scene;
 		this.UpdateList = [];
 		this.BoundingList = [];
+		this.effectController  = {
+					turbidity: 10,
+					rayleigh: 2,
+					mieCoefficient: 0.005,
+					mieDirectionalG: 0.8,
+					luminance: 1,
+					inclination: 0.49, // elevation / inclination
+					azimuth: 0.25, // Facing front,
+					sun: ! true
+		};
+
+		this.Sky = null;
 	}
 
 	LoadTestScene(){
 
-		//Set Up Water
-		var WaterSetUp = new WaterScript();
-		WaterSetUp.Setup();
+		//Set Up sky
+		this.Sky = new THREE.Sky();
+		this.Sky.scale.setScalar( 450000 );
+		Galacta.Engine.AddObject(this.Sky);
+		// Add Sun Helper
+		let distance = 400000;
+		let SunObj = new THREE.Mesh(
+			new THREE.SphereBufferGeometry( 20000, 16, 8 ),
+			new THREE.MeshBasicMaterial( { color: 0xffffff } )
+		);
+
+
+
 		//Add Water and Sun to update list
 		this.UpdateList[this.UpdateList.length] = WaterSetUp;
 

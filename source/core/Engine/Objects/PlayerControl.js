@@ -30,7 +30,6 @@ class PlayerControl{
     //Create the pointer lock
     this.PointerLockControl = new THREE.PointerLockControls(Galacta.Engine.Camera);
     this.Player.Obj = this.PointerLockControl.getObject();
-
     //Add the Camera to the scene
     Galacta.Engine.AddObject(this.Player.Obj);
 
@@ -66,7 +65,7 @@ class PlayerControl{
     this.Player.Update(); //Player.js
 
     //Movement
-    var SPEED = 10000;
+    var SPEED = 25000;
     var velocity = new THREE.Vector3();
     var direction = new THREE.Vector3();
 
@@ -83,12 +82,13 @@ class PlayerControl{
     if(this.Keys.w == 1 || this.Keys.s == 1 ){
       velocity.z -= direction.z * SPEED * this.CurrentTick;
     }
-
     if(this.Keys.a == 1 || this.Keys.d == 1){
       velocity.x -= direction.x * SPEED * this.CurrentTick;
     }
     this.Player.Obj.translateX( velocity.x * this.CurrentTick );
     this.Player.Obj.translateZ( velocity.z * this.CurrentTick );
+    this.Player.Obj.position.y = 0;
+
   }
 
 

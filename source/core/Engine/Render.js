@@ -31,7 +31,8 @@ class Renderer{
 			//Append Renderer
 			document.body.appendChild( WEBVR.createButton(this.RObj) );
 		}else{
-			this.RObj = new THREE.WebGLRenderer();
+			this.RObj = new THREE.WebGLRenderer( { antialias: true } );
+
 
 			//Set Setting
 			this.RObj.setPixelRatio( window.devicePixelRatio );
