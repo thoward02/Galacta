@@ -38,7 +38,7 @@ class MainScene{
 					rayleigh: 2,
 					mieCoefficient: 0.005,
 					mieDirectionalG: 0.8,
-					luminance: 0.5,
+					luminance: 1,
 					inclination: 0.49, // elevation / inclination
 					azimuth: 0.4, // Facing front,
 					sun: ! true
