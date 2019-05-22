@@ -65,7 +65,7 @@ class PlayerControl{
     this.Player.Update(); //Player.js
 
     //Movement
-    var SPEED = 25000;
+    var SPEED = 10000;
     var velocity = new THREE.Vector3();
     var direction = new THREE.Vector3();
 
